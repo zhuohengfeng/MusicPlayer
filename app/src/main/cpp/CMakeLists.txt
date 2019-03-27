@@ -10,8 +10,10 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ${CMAKE_SOURCE_DIR}/native-lib.cpp)
-
+        ${CMAKE_SOURCE_DIR}/native-lib.cpp
+        ${CMAKE_SOURCE_DIR}/NativeCallback.cpp
+        ${CMAKE_SOURCE_DIR}/DdFFmpeg.cpp
+        ${CMAKE_SOURCE_DIR}/DdAudio.cpp)
 
 add_library( avcodec-57 SHARED IMPORTED)
 set_target_properties( avcodec-57
@@ -53,14 +55,12 @@ set_target_properties( swscale-4
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_SOURCE_DIR}/jniLibs/${ANDROID_ABI}/libswscale-4.so)
 
-
 find_library( # Sets the name of the path variable.
         log-lib
 
         # Specifies the name of the NDK library that
         # you want CMake to locate.
         log)
-
 
 target_link_libraries( # Specifies the target library.
         native-lib

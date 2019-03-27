@@ -19,7 +19,7 @@ android {
                 abiFilters "armeabi-v7a"
             }
         }
-        // 设置ffmpeg所用到的so
+        // 设置ffmpeg所用到的so--这里我们用CMAKE，所以可加可不加
         sourceSets {
             main {
                 jniLibs.srcDirs = ['src/main/cpp/jniLibs']
