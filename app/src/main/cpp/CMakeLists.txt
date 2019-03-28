@@ -10,10 +10,12 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ${CMAKE_SOURCE_DIR}/native-lib.cpp
-        ${CMAKE_SOURCE_DIR}/NativeCallback.cpp
+        ${CMAKE_SOURCE_DIR}/DdCallJava.cpp
+        ${CMAKE_SOURCE_DIR}/DdPlayStatus.cpp
+        ${CMAKE_SOURCE_DIR}/DdQueue.cpp
+        ${CMAKE_SOURCE_DIR}/DdAudio.cpp
         ${CMAKE_SOURCE_DIR}/DdFFmpeg.cpp
-        ${CMAKE_SOURCE_DIR}/DdAudio.cpp)
+        ${CMAKE_SOURCE_DIR}/native-lib.cpp)
 
 add_library( avcodec-57 SHARED IMPORTED)
 set_target_properties( avcodec-57

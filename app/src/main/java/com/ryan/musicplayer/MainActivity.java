@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.ryan.musicplayer.callback.INativeCallback;
 import com.ryan.musicplayer.music.core.MusicManager;
-import com.ryan.musicplayer.utils.Logger;
 
 public class MainActivity extends AppCompatActivity implements INativeCallback {
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements INativeCallback {
 
     @Override
     public void onPrepared() {
-        Logger.d("解码器准备好了，开始播放");
+        LogUtils.d("zhf_music JAVA: 解码器准备好了，开始播放");
         manager.start();
     }
 }

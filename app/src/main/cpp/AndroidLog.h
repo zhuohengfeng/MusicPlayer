@@ -2,8 +2,8 @@
 // Created by hengfeng zhuo on 2019/3/25.
 //
 
-#ifndef MUSICPLAYER_DDAUDIO_H
-#define MUSICPLAYER_DDAUDIO_H
+#ifndef MUSICPLAYER_ANDROID_LOG_H
+#define MUSICPLAYER_ANDROID_LOG_H
 
 #include "android/log.h"
 
@@ -13,4 +13,4 @@
 #define LOGE(FORMAT,...) __android_log_print(ANDROID_LOG_ERROR,"zhf_music",FORMAT,##__VA_ARGS__);
 
 
-#endif //MUSICPLAYER_DDAUDIO_H
+#endif //MUSICPLAYER_ANDROID_LOG_H
