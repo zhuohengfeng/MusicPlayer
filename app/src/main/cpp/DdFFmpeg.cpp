@@ -42,13 +42,6 @@ void DdFFmpeg::prepare() {
 }
 
 
-/**
- * 开始播放
- */
-void DdFFmpeg::start(void) {
-    LOGD("开始播放....");
-
-}
 
 void DdFFmpeg::decodeFFmpegThread() {
     LOGD("开始执行解码流程...decodeFFmpegThread");
@@ -104,4 +97,54 @@ void DdFFmpeg::decodeFFmpegThread() {
 
     LOGD("解码流程结束...通知java层");
     this->pCallJava->onCallPrepared(CHILD_THREAD);
+}
+
+
+
+/**
+ * 开始播放
+ */
+void DdFFmpeg::start(void) {
+    LOGD("开始播放....");
+
+    if (this->pAudio != NULL) {
+        LOGE("pAudio为空， 退出");
+        return;
+    }
+
+    int count = 0;
+    while(1) {
+        AVPacket* avPacket = av_packet_alloc();
+        if (av_read_frame(this->pAvFormatContext, avPacket) == 0) {
+            if (avPacket->stream_index == pAudio->streamIndex) {
+                count++;
+                LOGD("解码第%d帧", count);
+                pAudio->pQueue->putAvPacket(avPacket);
+            }
+            else {
+                av_packet_free(&avPacket);
+                av_free(avPacket);
+            }
+        }
+        else {
+            LOGD("解码完成");
+            av_packet_free(&avPacket);
+            av_free(avPacket);
+            break;
+        }
+    }
+
+
+    //模拟出队
+    while (pAudio->pQueue->getQueueSize() > 0)
+    {
+        AVPacket *packet = av_packet_alloc();
+        pAudio->pQueue->getAvPacket(packet);
+        av_packet_free(&packet);
+        av_free(packet);
+        packet = NULL;
+    }
+    LOGD("解码完成");
+
+
 }
