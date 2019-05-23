@@ -13,8 +13,8 @@
 class DdCallJava {
 
 public:
-    JavaVM* javaVM;
-    JNIEnv* jniEnv;
+    JavaVM* javaVM = NULL;
+    JNIEnv* jniEnv = NULL;
     jobject jobj;
 
     jmethodID jmid;

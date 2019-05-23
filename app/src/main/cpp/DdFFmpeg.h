@@ -20,16 +20,16 @@ extern "C"
 class DdFFmpeg {
 
 public:
-    DdAudio* pAudio;
-    DdCallJava* pCallJava;
-    DdPlayStatus* pPlayStatus;
+    DdAudio* pAudio = NULL;
+    DdCallJava* pCallJava = NULL;
+    DdPlayStatus* pPlayStatus = NULL;
 
     const char* URL;
 
     // 注意，这里不是指针类型，所以在创建这个实例的时候，decodeThread就会创建完成！！和java不一样！！！
     pthread_t decodeThread;
     // 注意，这里指针类型，所以创建实例的时候，这个指针没有指向具体的实例
-    AVFormatContext* pAvFormatContext;
+    AVFormatContext* pAvFormatContext = NULL;
 
 
 public:

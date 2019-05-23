@@ -76,6 +76,9 @@ target_link_libraries( # Specifies the target library.
         swresample-2
         swscale-4
 
+        # 引入opensl es
+        OpenSLES
+
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

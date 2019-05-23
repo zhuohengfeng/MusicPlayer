@@ -38,7 +38,7 @@ int DdQueue::getAvPacket(AVPacket *packet_out) {
     while(this->pPlayStatus != NULL && !this->pPlayStatus->exit) {
         if (this->queuePacket.size() > 0) {
             AVPacket* packet = this->queuePacket.front();
-            if (av_packet_ref(packet_out, packet) == 0) {
+            if (av_packet_ref(packet_out, packet) == 0) { // 从队列中获取一个AVPacket，并拷贝到packet_out
                 this->queuePacket.pop();
             }
             av_packet_free(&packet);
