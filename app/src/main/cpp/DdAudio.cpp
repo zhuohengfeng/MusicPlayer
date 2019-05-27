@@ -101,6 +101,8 @@ int DdAudio::resampleAudio() {
                     avFrame->nb_samples);
 
             int out_channels = av_get_channel_layout_nb_channels(AV_CH_LAYOUT_STEREO);
+
+            /** 通道数*采样率*位数/8，比如44100*2*16/8就是一秒的pcm 的数据大小 */
             data_size = nb * out_channels * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
 
             if(LOG_DEBUG)
@@ -177,6 +179,7 @@ int DdAudio::getCurrentSampleRateForOpensles(int sample_rate) {
     return rate;
 }
 
+/** 这里设置回调后，会一直的执行，在回调中把PCM数据入队，opensl就会通知去播放，等播放完成后再回来取数据 */
 void pcmBufferCallBack(SLAndroidSimpleBufferQueueItf bf, void * context)
 {
     DdAudio *pAudio = (DdAudio *) context;
@@ -190,7 +193,6 @@ void pcmBufferCallBack(SLAndroidSimpleBufferQueueItf bf, void * context)
         }
     }
 }
-
 
 /**
  * 开始播放，初始化 opensl es
@@ -246,8 +248,27 @@ void DdAudio::initOpenSLES() {
 //    注册回调缓冲区 获取缓冲队列接口
     (*pcmPlayerObject)->GetInterface(pcmPlayerObject, SL_IID_BUFFERQUEUE, &pcmBufferQueue);
     //缓冲接口回调
+    /** 这里设置回调后，会一直的执行，在回调中把PCM数据入队，opensl就会通知去播放，等播放完成后再回来取数据 */
     (*pcmBufferQueue)->RegisterCallback(pcmBufferQueue, pcmBufferCallBack, this);
 //    获取播放状态接口
     (*pcmPlayerPlay)->SetPlayState(pcmPlayerPlay, SL_PLAYSTATE_PLAYING);
     pcmBufferCallBack(pcmBufferQueue, this);
+}
+
+void DdAudio::pausePlay() {
+    if (pcmPlayerPlay != NULL) {
+        (*pcmPlayerPlay)->SetPlayState(pcmPlayerPlay, SL_PLAYSTATE_PAUSED);
+    }
+}
+
+void DdAudio::resumePlay() {
+    if (pcmPlayerPlay != NULL) {
+        (*pcmPlayerPlay)->SetPlayState(pcmPlayerPlay, SL_PLAYSTATE_PLAYING);
+    }
+}
+
+void DdAudio::stopPlay() {
+    if (pcmPlayerPlay != NULL) {
+        (*pcmPlayerPlay)->SetPlayState(pcmPlayerPlay, SL_PLAYSTATE_STOPPED);
+    }
 }

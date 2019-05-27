@@ -163,3 +163,21 @@ void DdFFmpeg::start(void) {
 
     LOGD("解码完成");
 }
+
+void DdFFmpeg::pause(void) {
+    if (pAudio != NULL) {
+        pAudio->pausePlay();
+    }
+}
+
+void DdFFmpeg::resume(void) {
+    if (pAudio != NULL) {
+        pAudio->resumePlay();
+    }
+}
+
+void DdFFmpeg::stop(void) {
+    if (pAudio != NULL) {
+        pAudio->stopPlay();
+    }
+}

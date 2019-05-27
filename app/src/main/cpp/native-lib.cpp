@@ -70,3 +70,28 @@ Java_com_ryan_musicplayer_music_core_MusicManager_start(JNIEnv *env, jobject ins
 
 }
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_ryan_musicplayer_music_core_MusicManager_pause(JNIEnv *env, jobject instance) {
+
+    if (pFFmpeg != NULL) {
+        pFFmpeg->pause();
+    }
+
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_ryan_musicplayer_music_core_MusicManager_resume(JNIEnv *env, jobject instance) {
+
+    if (pFFmpeg != NULL) {
+        pFFmpeg->resume();
+    }
+
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_ryan_musicplayer_music_core_MusicManager_stop(JNIEnv *env, jobject instance) {
+
+    if (pFFmpeg != NULL) {
+        pFFmpeg->stop();
+    }
+
+}

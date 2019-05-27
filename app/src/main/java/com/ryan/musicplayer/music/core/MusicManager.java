@@ -33,11 +33,12 @@ public class MusicManager {
         mNativeCallback = callback;
     }
 
-
     /** 准备解码器 */
     public native void prepare(String url);
     /** 开始进行播放 */
     public native void start();
-
+    public native void pause();
+    public native void resume();
+    public native void stop();
 
 }

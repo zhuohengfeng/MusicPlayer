@@ -65,6 +65,9 @@ public:
 
     int getCurrentSampleRateForOpensles(int sample_rate);
 
+    void pausePlay();
+    void resumePlay();
+    void stopPlay();
 };
 
 #endif //MUSICPLAYER_DDAUDIO_H

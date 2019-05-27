@@ -14,6 +14,7 @@ add_library( # Sets the name of the library.
         ${CMAKE_SOURCE_DIR}/DdPlayStatus.cpp
         ${CMAKE_SOURCE_DIR}/DdQueue.cpp
         ${CMAKE_SOURCE_DIR}/DdAudio.cpp
+        ${CMAKE_SOURCE_DIR}/DdVideo.cpp
         ${CMAKE_SOURCE_DIR}/DdFFmpeg.cpp
         ${CMAKE_SOURCE_DIR}/native-lib.cpp)
 

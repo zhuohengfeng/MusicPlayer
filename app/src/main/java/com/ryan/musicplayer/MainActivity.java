@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements INativeCallback {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                manager.prepare("http://mpge.5nd.com/2015/2015-11-26/69708/1.mp3");
+                manager.prepare("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+//                manager.prepare("http://mpge.5nd.com/2015/2015-11-26/69708/1.mp3");
             }
         }).start();
     }
@@ -43,6 +44,33 @@ public class MainActivity extends AppCompatActivity implements INativeCallback {
             @Override
             public void run() {
                 manager.start();
+            }
+        }).start();
+    }
+
+    public void onPauseClick(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                manager.pause();
+            }
+        }).start();
+    }
+
+    public void onResumeClick(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                manager.resume();
+            }
+        }).start();
+    }
+
+    public void onStopClick(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                manager.stop();
             }
         }).start();
     }

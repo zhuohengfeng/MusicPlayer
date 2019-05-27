@@ -38,6 +38,9 @@ public:
 
     void prepare(void);
     void start(void);
+    void pause(void);
+    void resume(void);
+    void stop(void);
 
     // 具体的解码操作
     void decodeFFmpegThread();
